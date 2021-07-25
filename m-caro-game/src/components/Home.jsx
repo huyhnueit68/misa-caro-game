@@ -8,15 +8,7 @@ import Row from "./board/Row";
  * @param {*} param0 
  * @returns 
  */
-export default function Home({
-    array_board,
-    tickTurns, piece_current,
-    is_win, reset_map }) {
-    
-    //set state
-    const [numberCells, setNumberCells] = useState(20)
-    const [show, setShow] = useState(false)
-
+export default function Home({array_board }) {
     return (
         <div className="container">
             {/* header */}
@@ -29,14 +21,13 @@ export default function Home({
                             <div>
                                 <Row
                                     elements={e}
-                                    row={index}
-                                    tick={(row, col) => tickTurns(row, col)}
+                                    key={index}
                                 />
                             </div>
                         ))}
                     </div>
                 </div>
-                <div className="content__info">
+                {/* <div className="content__info">
                     <p className="title">INFORMATION</p>
                     <p>ACTIVE: {piece_current}</p>
                     <p> {" "} Result :{" "}
@@ -49,7 +40,7 @@ export default function Home({
                     <button onClick={() => reset_map()} className="btn btn-info">
                     Reset
                     </button>
-                </div>
+                </div> */}
             </div>
             {/* Footer */}
             <Footer />

@@ -8,14 +8,11 @@ import Cell from "./Cell";
  * @param {function} tickTurns
  * CreatedBy: PQ Huy (25.07.2021)
  */
-export default function Row({ elements, row, tickTurns }) {
+export default function Row({ elements }) {
     
     const renderCells = elements.map((element, index) => (
         <Cell
             data={element}
-            row={row}
-            col={index}
-            tickTurns={(row,col) => tickTurns(row,col)}
         />
     ))
 
