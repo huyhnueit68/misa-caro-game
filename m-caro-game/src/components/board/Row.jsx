@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Cell from "./Cell";
 
 /**
@@ -8,7 +8,7 @@ import Cell from "./Cell";
  * @param {function} tickTurns
  * CreatedBy: PQ Huy (25.07.2021)
  */
-export default function Row({ elements, rowNumber, onClick }) {
+export default function Row({ elements, rowNumber, onClick, prieceWin }) {
     
     const renderCells = elements.map((element, index) => (
         <Cell
@@ -25,6 +25,9 @@ export default function Row({ elements, rowNumber, onClick }) {
 
             // set on click and pass index number for component app
             onClick={onClick}
+
+            //prieceWin
+            prieceWin={prieceWin}
         />
     ))
 

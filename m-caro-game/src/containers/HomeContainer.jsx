@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux'
+import React, { useState } from 'react';
+// import { useSelector, useDispatch } from 'react-redux'
 import '../css/header.css'
 import '../css/content.css'
 import '../css/footer.css'

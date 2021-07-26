@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Header from "./commons/Header";
 import Footer from "./commons/Footer";
 import Row from "./board/Row";
@@ -13,10 +13,12 @@ export default function Home(props) {
     const { array_board, setArrayBoard, xIsNext, setXIsNext, endGame, setEnd, resetMap } = props;
     const [activeText, setActiveText] = useState('X');
     const [resultGame, setResultGame] = useState(null);
+    const [prieceWin, setPrieceWin] = useState([]);
 
     const resetBoard = () => {
         setActiveText('X');
         setResultGame(null);
+        setPrieceWin([])
         resetMap();
     }
     /**
@@ -28,25 +30,17 @@ export default function Home(props) {
      */
     const checkWinner = (rowNumber, colNumber, setResultGame) => {
         let checkedLenght = CheckedWinner(array_board, rowNumber, colNumber, xIsNext, setResultGame);
-
+        
         if (checkedLenght.length > 0) {
-            // return x winner
+            checkedLenght.push([rowNumber, colNumber])
+            setPrieceWin(checkedLenght)
+            // return winner
             return true
         } else {
+            setPrieceWin([])
             // not winner
             return false
         }
-    }
-
-    /**
-     * Function set active text
-     * @returns string
-     * CreatedBy:  PQ Huy(26.07.2021)
-     */
-    const setTexResult = () => {
-        let text = '';
-
-        return text;
     }
 
     /**
@@ -71,6 +65,7 @@ export default function Home(props) {
                 setXIsNext();
 
                 if (isWinner) {
+                    // show alert winner
                     setEnd();
                     return;
                 }
@@ -90,19 +85,19 @@ export default function Home(props) {
                     <div className="content__board-game">
                         <div className="col-md-10">
                             {array_board.map((e, index) => (
-                                <div className="board-game__row">
+                                <div className="board-game__row" key={index}>
                                     <Row
                                         // element map cell
                                         elements={e}
-
-                                        // set key
-                                        key={index}
 
                                         // set row index
                                         rowNumber={index}
 
                                         // handle click event
                                         onClick={(rowNumber, colNumber) => handleClick(rowNumber, colNumber)}
+
+                                        //set priece win
+                                        prieceWin={prieceWin}
                                     />
                                 </div>
                             ))}
