@@ -11,15 +11,23 @@ import {CheckedWinner} from "../algorithm/checkWin";
  */
 export default function Home(props) {
     const { array_board, setArrayBoard, xIsNext, setXIsNext, endGame, setEnd, resetMap } = props;
+    const [activeText, setActiveText] = useState('X');
+    const [resultGame, setResultGame] = useState(null);
 
+    const resetBoard = () => {
+        setActiveText('X');
+        setResultGame(null);
+        resetMap();
+    }
     /**
      * Function check winner
      * @param {number} rowNumber 
      * @param {number} colNumber 
+     * @param {function} setResultGame
      * CreatedBy:  PQ Huy (26.07.2021)
      */
-    const checkWinner = (rowNumber, colNumber) => {
-        let checkedLenght = CheckedWinner(array_board, rowNumber, colNumber, xIsNext);
+    const checkWinner = (rowNumber, colNumber, setResultGame) => {
+        let checkedLenght = CheckedWinner(array_board, rowNumber, colNumber, xIsNext, setResultGame);
 
         if (checkedLenght.length > 0) {
             // return x winner
@@ -30,6 +38,11 @@ export default function Home(props) {
         }
     }
 
+    /**
+     * Function set active text
+     * @returns string
+     * CreatedBy:  PQ Huy(26.07.2021)
+     */
     const setTexResult = () => {
         let text = '';
 
@@ -44,22 +57,25 @@ export default function Home(props) {
      */
     const handleClick = (rowNumber, colNumber) => {
         if (!endGame) {
-            // check winner
-            let isWinner = checkWinner(rowNumber, colNumber);
+            if (array_board[rowNumber][colNumber] == null) {
+                // check winner
+                let isWinner = checkWinner(rowNumber, colNumber, setResultGame);
 
-            // set value array with 1 element
-            let valueInput = xIsNext ? "X" : "O";
+                // set value array with 1 element
+                let valueInput = xIsNext ? "X" : "O";
 
-            // binding array array_board
-            setArrayBoard(valueInput, rowNumber, colNumber);
+                // binding array array_board
+                setArrayBoard(valueInput, rowNumber, colNumber);
 
-            // set is next change turn for user
-            setXIsNext();
-        debugger
+                // set is next change turn for user
+                setXIsNext();
 
-            if (isWinner) {
-                setEnd();
-                return;
+                if (isWinner) {
+                    setEnd();
+                    return;
+                }
+
+                setActiveText(getActiveText(xIsNext));
             }
         }
     };
@@ -94,11 +110,11 @@ export default function Home(props) {
                     </div>
                     <div className="content__info">
                         <p className="title">INFORMATION</p>
-                        <p>ACTIVE: </p>
+                        <p>ACTIVE: <span className="result-text">{activeText}</span></p>
                         <p> {" "} Result :{" "}
-                            {setTexResult}
+                            <span className="result-text">{resultGame}</span>
                         </p>
-                        <button onClick={() => resetMap()} className="m-btn btn-info">
+                        <button onClick={() => resetBoard()} className="m-btn btn-info">
                         Play Again
                         </button>
                     </div>
@@ -109,4 +125,14 @@ export default function Home(props) {
         </div>
         
     );
+}
+
+/**
+ * 
+ * @returns 
+ */
+const getActiveText = (xIsNext) => {
+    let text = !xIsNext ? 'X' : 'O'
+
+    return text;
 }
