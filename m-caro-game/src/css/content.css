@@ -1,0 +1,95 @@
+/* style main css */
+
+.content {
+  display: flex;
+}
+
+.content .content__board-game {
+  padding-right: 55px;
+}
+
+/* style button */
+.content__board-game .m-btn-caro {
+  padding: 0;
+  min-width: 25px;
+  max-width: 25px;
+  min-height: 25px;
+  max-height: 25px;
+  background-color: #fff;
+  border: 1px solid gray !important;
+  font: 1em sans-serif;
+  transition: none !important;
+}
+
+.btn-piece:hover {
+  cursor: pointer;
+  background-color: #ffc107;
+}
+
+/* css button play again */
+
+.btn-info {
+  cursor: pointer;
+  color: #fff;
+  background-color: rgb(102, 148, 209);
+  border-color: rgb(102, 148, 209);
+}
+
+.btn-info:hover {
+  text-decoration: none;
+  color: #fff;
+  background-color: rgb(78, 121, 177);
+  border-color: rgb(78, 121, 177);
+}
+
+.btn-info:focus {
+  text-decoration: none;
+  box-shadow: 0 0 0 0.2rem rgba(78, 121, 177, 0.445);
+}
+
+.board-game__row {
+  width: 1300px !important;
+  height: 25px;
+}
+
+.board-game__row .btn:not(:disabled):not(.disabled) {
+  cursor: pointer;
+}
+
+.m-btn,
+.board-game__row .btn {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+}
+
+.board-game__row .btn-piece {
+  padding: 0;
+  min-width: 25px;
+  max-width: 25px;
+  min-height: 25px;
+  max-height: 25px;
+  border: 1px solid gray !important;
+  font: 1em sans-serif;
+  transition: none !important;
+}
+
+.btnX {
+  color: lightcoral;
+}
+
+.btnO {
+  color: #177f75;
+}
+
+.content__info .title {
+  font-weight: 500;
+}
