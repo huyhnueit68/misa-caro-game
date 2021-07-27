@@ -4,7 +4,7 @@ import Footer from "./commons/Footer";
 import Row from "./board/Row";
 import { CheckedWinner } from "../algorithm/checkWin";
 import swal from 'sweetalert';
-import { pieces, StateGame, titleGame } from "../@Types/Resources";
+import { pieces, titleGame } from "../@Types/Resources";
 
 /**
  * 

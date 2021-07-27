@@ -15,7 +15,7 @@ export const className = {
 }
 
 export const titleGame = {
-    title: '>MISA CARO GAME 50x50',
+    title: 'MISA CARO GAME 50x50',
     winner: ' IS THE WINING PLAYER',
     dickens: 'Two players dickens'
 }
