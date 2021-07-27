@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import Header from "./commons/Header";
 import Footer from "./commons/Footer";
 import Row from "./board/Row";
-import {CheckedWinner} from "../algorithm/checkWin";
+import { CheckedWinner } from "../algorithm/checkWin";
+import swal from 'sweetalert';
+import { pieces, StateGame, titleGame } from "../@Types/Resources";
 
 /**
  * 
@@ -56,7 +58,7 @@ export default function Home(props) {
                 let isWinner = checkWinner(rowNumber, colNumber, setResultGame);
 
                 // set value array with 1 element
-                let valueInput = xIsNext ? "X" : "O";
+                let valueInput = xIsNext ? pieces.X : pieces.O;
 
                 // binding array array_board
                 setArrayBoard(valueInput, rowNumber, colNumber);
@@ -66,11 +68,38 @@ export default function Home(props) {
 
                 if (isWinner) {
                     // show alert winner
+                    swal(valueInput + titleGame.winner);
+
+                    // set end game
                     setEnd();
                     return;
                 }
 
                 setActiveText(getActiveText(xIsNext));
+
+                // check is dickens
+                let isNotNull = true;
+
+                // check array board is full
+                for (let i = 0; i <= array_board.length - 1; i++) {
+                    for (let j = 0; j <= array_board[i].length - 1; j++) {
+                        if (array_board[i][j] == null) {
+                            isNotNull = false;
+                            break;
+                        }
+                    }
+                }
+                
+                if (isNotNull) {
+                    // show alert
+                    swal(titleGame.dickens);
+
+                    //set result title
+                    setResultGame(titleGame.dickens)
+
+                    // set end game
+                    setEnd();
+                }
             }
         }
     };
@@ -127,7 +156,7 @@ export default function Home(props) {
  * @returns 
  */
 const getActiveText = (xIsNext) => {
-    let text = !xIsNext ? 'X' : 'O'
+    let text = !xIsNext ? pieces.X : pieces.O
 
     return text;
 }

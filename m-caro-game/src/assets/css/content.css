@@ -105,3 +105,16 @@
 .btn-win:hover {
   background-color: rgb(102, 148, 209);
 }
+
+.swal-text {
+  font-weight: 500;
+  color: #000;
+}
+
+.swal-button--confirm {
+  background-color: rgb(102, 148, 209);
+}
+
+.swal-button--confirm:hover {
+  background-color: rgb(78, 121, 177) !important;
+}

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import {numberInfo, isNext} from '../@Types/Enumeration'
 // import { useSelector, useDispatch } from 'react-redux'
-import '../css/header.css'
-import '../css/content.css'
-import '../css/footer.css'
+import '../assets/css/header.css'
+import '../assets/css/content.css'
+import '../assets/css/footer.css'
 import Home from '../components/Home'
 
 function HomeContainer() {
@@ -15,7 +16,7 @@ function HomeContainer() {
   /**
    * Function init array board
    * @param {number} numberCell 
-   * @returns 
+   * @returns
    * CreatedBy:  PQ Huy (25.07.2021)
    */
   const initArrayBoard = (numberCell) => {
@@ -23,9 +24,9 @@ function HomeContainer() {
     return Array(number_cell).fill(null).map(() => Array(number_cell).fill(null))
   };
 
-  const [array_board, setArrayBoard] = useState(initArrayBoard(50))
-  const [xIsNext, setXIsNext] = useState(true)
-  const [endGame, setEndGame] = useState(false);
+  const [array_board, setArrayBoard] = useState(initArrayBoard(numberInfo.SizeBoard))
+  const [xIsNext, setXIsNext] = useState(isNext.isX)
+  const [endGame, setEndGame] = useState(isNext.newGame);
 
   /**
    * Function reset map
@@ -33,13 +34,13 @@ function HomeContainer() {
    */
   const resetMap = () => {
     // reset array board
-    setArrayBoard(initArrayBoard(50))
+    setArrayBoard(initArrayBoard(numberInfo.SizeBoard))
 
     // reset turn user
-    setXIsNext(true)
+    setXIsNext(isNext.isX)
 
     // set end game
-    setEndGame(false)
+    setEndGame(isNext.newGame)
   }
 
   /**
@@ -47,7 +48,7 @@ function HomeContainer() {
    * CreatedBy:  PQ Huy (26.07.2021)
    */
   const setEnd = () => {
-    setEndGame(true)
+    setEndGame(isNext.endGame)
   }
 
   /**

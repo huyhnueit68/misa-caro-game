@@ -1,10 +1,11 @@
 import React from "react";
+import { titleGame } from "../../@Types/Resources"
 
 export default function Header() {
   return (
       <div className="container">
         <nav className="navbar navbar-expand-sm navbar-light bg-faded">
-          <a className="navbar-brand" href="/">MISA CARO GAME 50x50</a>
+        <a className="navbar-brand" href="/">{titleGame.titleGame}</a>
         </nav>
       </div>
   );

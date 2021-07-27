@@ -1,3 +1,5 @@
+import { pieces, StateGame } from "../@Types/Resources";
+
 /**
  * Function check win follow column
  * @param {array} board 
@@ -34,9 +36,9 @@ const checkColumnWin = (board, row, col, turn_text, setResultGame) => {
         }
 
         //check if front and back are blocked
-        if (piece_win.length >= 3) {
+        if (piece_win.length === 3) {
             if (board[indexBefore - 1][col] === null && board[indexAfter + 1][col] === null) {
-                setResultGame(turn_text + " WIN")
+                setResultGame(turn_text + StateGame.Winner)
                 return piece_win;
             }
         }
@@ -44,7 +46,7 @@ const checkColumnWin = (board, row, col, turn_text, setResultGame) => {
         // check length > 4
         if (piece_win.length >= 4) {
             piece_win.push([row, col]);
-            setResultGame(turn_text + " WIN")
+            setResultGame(turn_text + StateGame.Winner)
             return piece_win;
         }
     } catch (e) {
@@ -90,9 +92,9 @@ const checkRowWin = (board, row, col, turn_text, setResultGame) => {
         }
 
         //check if front and back are blocked
-        if (piece_win.length >= 3) {
+        if (piece_win.length === 3) {
             if (board[row][indexBefore - 1] === null && board[row][indexAfter + 1] === null) {
-                setResultGame(turn_text + " WIN")
+                setResultGame(turn_text + StateGame.Winner)
                 return piece_win;
             }
         }
@@ -100,7 +102,7 @@ const checkRowWin = (board, row, col, turn_text, setResultGame) => {
         // check length > 4
         if (piece_win.length >= 4) {
             piece_win.push([row, col]);
-            setResultGame(turn_text + " WIN")
+            setResultGame(turn_text + StateGame.Winner)
             return piece_win;
         }
     } catch (e) {
@@ -160,9 +162,9 @@ const checkDialognalLeft = (board, row, col, turn_text, setResultGame) => {
         }
 
         //check if front and back are blocked
-        if (piece_win.length >= 3) {
+        if (piece_win.length === 3) {
             if (board[row_indexBefore - 1][col_indexBefore - 1] === null && board[row_indexAfter + 1][col_indexAfter + 1] === null) {
-                setResultGame(turn_text + " WIN")
+                setResultGame(turn_text + StateGame.Winner)
                 return piece_win;
             }
         }
@@ -170,7 +172,7 @@ const checkDialognalLeft = (board, row, col, turn_text, setResultGame) => {
         // check length > 4
         if (piece_win.length >= 4) {
             piece_win.push([row, col]);
-            setResultGame(turn_text + " WIN")
+            setResultGame(turn_text + StateGame.Winner)
             return piece_win;
         }
     } catch (err) {
@@ -229,9 +231,9 @@ const checkDialognalRight = (board, row, col, turn_text, setResultGame) => {
         }
 
         //check if front and back are blocked
-        if (piece_win.length >= 3) {
+        if (piece_win.length === 3) {
             if (board[row_indexBefore - 1][col_indexBefore + 1] === null && board[row_indexAfter + 1][col_indexAfter - 1] === null) {
-                setResultGame(turn_text + " WIN")
+                setResultGame(turn_text + StateGame.Winner)
                 return piece_win;
             }
         }
@@ -239,7 +241,7 @@ const checkDialognalRight = (board, row, col, turn_text, setResultGame) => {
         // check length > 4
         if (piece_win.length >= 4) {
             piece_win.push([row, col]);
-            setResultGame(turn_text + " WIN")
+            setResultGame(turn_text + StateGame.Winner)
             return piece_win;
         }
     } catch (err) {
@@ -266,7 +268,7 @@ export const CheckedWinner = (board, row, col, turn, setResultGame) => {
         let piece_win = [];
 
         // change turn to text
-        let turn_text = turn ? 'X' : 'O'
+        let turn_text = turn ? pieces.X : pieces.O
 
         /**
          * Check win follow column
