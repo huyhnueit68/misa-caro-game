@@ -8,26 +8,26 @@ import Cell from "./Cell";
  * @param {function} tickTurns
  * CreatedBy: PQ Huy (25.07.2021)
  */
-export default function Row({ elements, rowNumber, onClick, prieceWin }) {
+export default function Row({ elements, row__Number, on__Action, priece__Win }) {
     
     const renderCells = elements.map((element, index) => (
         <Cell
             // set key
             key={index}
 
-            rowNumber={rowNumber}
+            row__Number={row__Number}
 
             //set col number 
-            colNumber={index}
+            col__Number={index}
             
             // set value for component square button
             data={element}
 
             // set on click and pass index number for component app
-            onClick={onClick}
+            on__Action={on__Action}
 
             //prieceWin
-            prieceWin={prieceWin}
+            priece__Win={priece__Win}
         />
     ))
 

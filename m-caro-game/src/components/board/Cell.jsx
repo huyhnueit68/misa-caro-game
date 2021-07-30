@@ -7,15 +7,15 @@ import { pieces, className } from "../../@Types/Resources";
  * @returns button for user select
  * CreatedBy: PQ Huy (25.07.2021)
  */
-export default function Cell({ rowNumber, colNumber, data, onClick, prieceWin }) {
+export default function Cell({ row__Number, col__Number, data, on__Action, priece__Win }) {
 
     let my_class_css = data === pieces.O ? className.CssO : data === pieces.X ? className.CssX : className.Nomaly;
     my_class_css += className.Nomaly
 
     // set class when have winner
-    if (prieceWin != null) {
-        for (var i = 0; i < prieceWin.length; i++) {
-            if (prieceWin[i][0] === rowNumber && prieceWin[i][1] === colNumber)
+    if (priece__Win != null) {
+        for (var i = 0; i < priece__Win.length; i++) {
+            if (priece__Win[i][0] === row__Number && priece__Win[i][1] === col__Number)
                 my_class_css = my_class_css.concat(className.Win);
         }
     }
@@ -23,7 +23,7 @@ export default function Cell({ rowNumber, colNumber, data, onClick, prieceWin })
     return (
         <button
             className={my_class_css}
-            onClick={() => onClick(rowNumber, colNumber)} >
+            onClick={() => on__Action(row__Number, col__Number)} >
             {data}
         </button>
     );

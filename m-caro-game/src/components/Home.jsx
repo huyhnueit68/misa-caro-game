@@ -12,7 +12,7 @@ import { pieces, titleGame } from "../@Types/Resources";
  * @returns 
  */
 export default function Home(props) {
-    const { array_board, setArrayBoard, xIsNext, setXIsNext, endGame, setEnd, resetMap } = props;
+    const { array_board, change__ArrayBoard, nextTurn, on__NextTurn, endGame, handle__EndGame, reset__Map } = props;
     const [activeText, setActiveText] = useState('X');
     const [resultGame, setResultGame] = useState(null);
     const [prieceWin, setPrieceWin] = useState([]);
@@ -21,7 +21,7 @@ export default function Home(props) {
         setActiveText('X');
         setResultGame(null);
         setPrieceWin([])
-        resetMap();
+        reset__Map();
     }
     /**
      * Function check winner
@@ -31,7 +31,7 @@ export default function Home(props) {
      * CreatedBy:  PQ Huy (26.07.2021)
      */
     const checkWinner = (rowNumber, colNumber, setResultGame) => {
-        let checkedLenght = CheckedWinner(array_board, rowNumber, colNumber, xIsNext, setResultGame);
+        let checkedLenght = CheckedWinner(array_board, rowNumber, colNumber, nextTurn, setResultGame);
         
         if (checkedLenght.length > 0) {
             checkedLenght.push([rowNumber, colNumber])
@@ -51,31 +51,31 @@ export default function Home(props) {
      * @param {*} colNumber 
      * CreatedBy: PQ Huy(25.07.2021)
      */
-    const handleClick = (rowNumber, colNumber) => {
+    const handle__Action = (rowNumber, colNumber) => {
         if (!endGame) {
             if (array_board[rowNumber][colNumber] == null) {
                 // check winner
                 let isWinner = checkWinner(rowNumber, colNumber, setResultGame);
 
                 // set value array with 1 element
-                let valueInput = xIsNext ? pieces.X : pieces.O;
+                let valueInput = nextTurn ? pieces.X : pieces.O;
 
                 // binding array array_board
-                setArrayBoard(valueInput, rowNumber, colNumber);
+                change__ArrayBoard(valueInput, rowNumber, colNumber);
 
                 // set is next change turn for user
-                setXIsNext();
+                on__NextTurn();
 
                 if (isWinner) {
                     // show alert winner
                     swal(valueInput + titleGame.winner);
 
                     // set end game
-                    setEnd();
+                    handle__EndGame();
                     return;
                 }
 
-                setActiveText(getActiveText(xIsNext));
+                setActiveText(getActiveText(nextTurn));
 
                 // check is dickens
                 let isNotNull = true;
@@ -98,7 +98,7 @@ export default function Home(props) {
                     setResultGame(titleGame.dickens)
 
                     // set end game
-                    setEnd();
+                    handle__EndGame();
                 }
             }
         }
@@ -120,13 +120,13 @@ export default function Home(props) {
                                         elements={e}
 
                                         // set row index
-                                        rowNumber={index}
+                                        row__Number={index}
 
                                         // handle click event
-                                        onClick={(rowNumber, colNumber) => handleClick(rowNumber, colNumber)}
+                                        on__Action={handle__Action}
 
                                         //set priece win
-                                        prieceWin={prieceWin}
+                                        priece__Win={prieceWin}
                                     />
                                 </div>
                             ))}
@@ -155,8 +155,8 @@ export default function Home(props) {
  * 
  * @returns 
  */
-const getActiveText = (xIsNext) => {
-    let text = !xIsNext ? pieces.X : pieces.O
+const getActiveText = (nextTurn) => {
+    let text = !nextTurn ? pieces.X : pieces.O
 
     return text;
 }

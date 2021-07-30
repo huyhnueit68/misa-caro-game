@@ -25,19 +25,19 @@ function HomeContainer() {
   };
 
   const [array_board, setArrayBoard] = useState(initArrayBoard(numberInfo.SizeBoard))
-  const [xIsNext, setXIsNext] = useState(isNext.isX)
+  const [nextTurn, setTurn] = useState(isNext.isX)
   const [endGame, setEndGame] = useState(isNext.newGame);
 
   /**
    * Function reset map
    * CreatedBy: PQ Huy (26.07.2021)
    */
-  const resetMap = () => {
+  const reset__Map = () => {
     // reset array board
     setArrayBoard(initArrayBoard(numberInfo.SizeBoard))
 
     // reset turn user
-    setXIsNext(isNext.isX)
+    setTurn(isNext.isX)
 
     // set end game
     setEndGame(isNext.newGame)
@@ -47,7 +47,7 @@ function HomeContainer() {
    * Function set end game
    * CreatedBy:  PQ Huy (26.07.2021)
    */
-  const setEnd = () => {
+  const handle__EndGame = () => {
     setEndGame(isNext.endGame)
   }
 
@@ -58,7 +58,7 @@ function HomeContainer() {
    * @param {number} col 
    * CreatedBy:  PQ Huy (26.07.2021)
    */
-  const changeArrayBoard = (value, row, col) => {
+  const change__Board = (value, row, col) => {
     // clone array board
     const cloneArray = [...array_board];
 
@@ -73,19 +73,19 @@ function HomeContainer() {
    * Function change state is next turn user
    * CreatedBy: PQ Huy (25.07.2021)
    */
-  const changeXIsNext = () => {
-    setXIsNext(!xIsNext);
+  const change__Turn = () => {
+    setTurn(!nextTurn);
   }
 
   return (
     <Home
       array_board={array_board}
-      setArrayBoard={(value, row, coll) => changeArrayBoard(value, row, coll)}
-      xIsNext={xIsNext}
-      setXIsNext={changeXIsNext}
+      change__ArrayBoard={(value, row, coll) => change__Board(value, row, coll)}
+      nextTurn={nextTurn}
+      on__NextTurn={change__Turn}
       endGame={endGame}
-      setEnd={setEnd}
-      resetMap={resetMap}
+      handle__EndGame={handle__EndGame}
+      reset__Map={reset__Map}
     />
     );
 }
