@@ -17,7 +17,7 @@ export default function Row({ elements, row__Number, on__Action, priece__Win }) 
 
             row__Number={row__Number}
 
-            //set col number 
+            //set col number
             col__Number={index}
             
             // set value for component square button

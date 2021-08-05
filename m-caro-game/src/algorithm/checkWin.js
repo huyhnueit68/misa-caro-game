@@ -1,4 +1,5 @@
 import { pieces, StateGame } from "../@Types/Resources";
+import { useSelector, useDispatch } from 'react-redux'
 
 /**
  * Function check win follow column
@@ -7,7 +8,7 @@ import { pieces, StateGame } from "../@Types/Resources";
  * @param {number} col 
  * @param {string} turn_text 
  * @param {function} setResultGame 
- * @returns 
+ * @returns array result
  * CreatedBy: PQ Huy (26.07.2021)
  */
 const checkColumnWin = (board, row, col, turn_text, setResultGame) => {
@@ -20,19 +21,23 @@ const checkColumnWin = (board, row, col, turn_text, setResultGame) => {
         
         // check before column
         indexBefore = row;
-        while (index >= 0 && board[index][col] === turn_text) {
-            piece_win.push([index, col]);
-            indexBefore = index;
-            index--;
+        if(typeof board[index] !== 'undefined') {
+                while (index >= 0 && board[index][col] === turn_text) {
+                piece_win.push([index, col]);
+                indexBefore = index;
+                index--;
+            }
         }
 
         // check after column
         index = row + 1;
         indexAfter = row;
-        while (index >= 0 && board[index][col] === turn_text) {
-            piece_win.push([index, col]);
-            indexAfter = index;
-            index++;
+        if (typeof board[index] !== 'undefined') {
+            while (index >= 0 && board[index][col] === turn_text) {
+                piece_win.push([index, col]);
+                indexAfter = index;
+                index++;
+            }
         }
 
         //check if front and back are blocked
@@ -76,19 +81,24 @@ const checkRowWin = (board, row, col, turn_text, setResultGame) => {
         
         // check before row
         indexBefore = col;
-        while (index >= 0 && board[row][index] === turn_text) {
-            piece_win.push([row, index]);
-            indexBefore = index;
-            index--;
+        if (typeof board[row][index] !== 'undefined') {
+            while (index >= 0 && board[row][index] === turn_text) {
+                piece_win.push([row, index]);
+                indexBefore = index;
+                index--;
+            }
         }
+        
 
         // check after row
         index = col + 1;
         indexAfter = col;
-        while (index >= 0 && board[row][index] === turn_text) {
-            piece_win.push([row, index]);
-            indexAfter = index;
-            index++;
+        if (typeof board[row][index] !== 'undefined') {
+            while (index >= 0 && board[row][index] === turn_text) {
+                piece_win.push([row, index]);
+                indexAfter = index;
+                index++;
+            }
         }
 
         //check if front and back are blocked
@@ -136,30 +146,36 @@ const checkDialognalLeft = (board, row, col, turn_text, setResultGame) => {
         // check win dialognal left before
         row_indexBefore = row;
         col_indexBefore = col;
-        while (row_index >= 0 && col_index >= 0 && board[row_index][col_index] === turn_text) {
-            piece_win.push([row_index, col_index]);
-            // set index before
-            row_indexBefore = row_index;
-            col_indexBefore = col_index;
-            //set col and row checked
-            row_index--;
-            col_index--;
+        if (typeof board[row_index] !== 'undefined') {
+            while (row_index >= 0 && col_index >= 0 && board[row_index][col_index] === turn_text) {
+                piece_win.push([row_index, col_index]);
+                // set index before
+                row_indexBefore = row_index;
+                col_indexBefore = col_index;
+                //set col and row checked
+                row_index--;
+                col_index--;
+            }
         }
+        
 
         // check win dialognal left before
         row_index = row + 1;
         col_index = col + 1;
         row_indexAfter = row;
         col_indexAfter = col;
-        while (row_index >= 0 && col_index >= 0 && board[row_index][col_index] === turn_text) {
-            piece_win.push([row_index, col_index]);
-            // set index before
-            row_indexAfter = row_index;
-            col_indexAfter = col_index;
-            //set col and row checked
-            row_index++;
-            col_index++;
+        if (typeof board[row_index] !== 'undefined') {
+            while (row_index >= 0 && col_index >= 0 && board[row_index][col_index] === turn_text) {
+                piece_win.push([row_index, col_index]);
+                // set index before
+                row_indexAfter = row_index;
+                col_indexAfter = col_index;
+                //set col and row checked
+                row_index++;
+                col_index++;
+            }
         }
+        
 
         //check if front and back are blocked
         if (piece_win.length === 3) {
@@ -264,6 +280,7 @@ const checkDialognalRight = (board, row, col, turn_text, setResultGame) => {
  */
 export const CheckedWinner = (board, row, col, turn, setResultGame) => {
     try {
+        
         // init piece win
         let piece_win = [];
 

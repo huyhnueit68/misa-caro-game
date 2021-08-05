@@ -84,8 +84,10 @@ export default function Home(props) {
                 for (let i = 0; i <= array_board.length - 1; i++) {
                     for (let j = 0; j <= array_board[i].length - 1; j++) {
                         if (array_board[i][j] == null) {
-                            isNotNull = false;
-                            break;
+                            if (i != rowNumber || j != colNumber) {
+                                isNotNull = false;
+                                break;
+                            }
                         }
                     }
                 }

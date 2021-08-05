@@ -1,0 +1,70 @@
+.box-start-game {
+    z-index: 30;
+    position: fixed;
+    align-items: center;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgb(245 245 245 / 84%);
+}
+
+.start-game__container {
+    position: relative;
+    left: 40%;
+    width: 453px;
+    height: 300px;
+    /* border: 15px solid red;
+    background-color: aqua; */
+}
+
+.form__container {
+    display: flex;
+    align-items: center;
+}
+
+.title__container {
+    font-weight: bold;
+}
+
+.form-control {
+    padding-right: 20px;
+}
+
+.form-control input {
+    margin: auto;
+    min-height: 150px;
+    max-height: 150px;
+    min-width: 150px;
+    max-width: 150px;
+    text-align: center;
+    border: 2px solid rgb(102, 148, 209);
+    font: 2em sans-serif;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.btn-submit {
+    min-width: 80px;
+    max-width: 80px;
+    min-height: 70px;
+    max-height: 70px;
+}
+
+.form-control input:focus {
+    text-decoration: none;
+    outline: none !important;
+    border-color: #719ECE;
+    box-shadow: 0 0 10px #719ECE;
+}
+
+.error {
+    font-weight: 500;
+    color: red;
+    position: absolute;
+}
+
+.error_input{
+    border: 2px solid red !important;
+}
